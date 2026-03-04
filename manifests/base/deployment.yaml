@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sveltekit-app
+  labels:
+    app: sveltekit-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sveltekit-app
+  template:
+    metadata:
+      labels:
+        app: sveltekit-app
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/your-org/your-sveltekit-app:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namePrefix: prod-
+
+images:
+  - name: ghcr.io/your-org/your-sveltekit-app
+    newTag: "1.2.3"
+
+patches:
+  - target:
+      kind: Deployment
+      name: sveltekit-app
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3

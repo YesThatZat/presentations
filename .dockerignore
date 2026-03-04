@@ -1,0 +1,38 @@
+# deps
+node_modules
+.pnpm-store
+.yarn
+.yarn-cache
+npm-cache
+.npm
+
+# build outputs
+build
+dist
+.svelte-kit
+.vercel
+.output
+.next
+coverage
+playwright-report
+storybook-static
+
+# tooling noise
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+*.log
+
+# caches
+**/.cache
+**/.turbo
+**/.eslintcache
+**/.vite
+**/.vitest
+**/.pytest_cache
+
+# env / secrets
+.env
+.env.*
